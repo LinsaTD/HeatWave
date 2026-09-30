@@ -111,8 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach(card => cardObserver.observe(card));
 
-    const recipientEmail = 'tdlinsa@gmail.com';
-    const directEmailEndpoint = 'https://formsubmit.co/ajax/' + recipientEmail;
+    const web3FormsAccessKey = 'YOUR_WEB3FORMS_ACCESS_KEY';
 
     document.querySelectorAll('.contact-form').forEach((form) => {
         form.addEventListener('submit', async (event) => {
@@ -125,12 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const request = String(formData.get('request') || formData.get('message') || '').trim();
 
             const payload = {
+                access_key: web3FormsAccessKey,
                 name,
                 email,
                 phone,
                 message: request,
-                _subject: 'Website enquiry',
-                _captcha: 'false'
+                subject: formData.has('phone') ? 'Website callback request' : 'Website contact enquiry'
             };
 
             const submitButton = form.querySelector('button[type="submit"]');
@@ -141,46 +140,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitButton.textContent = 'Sending...';
             }
 
-            const status = form.querySelector('.form-status');
+            let status = form.querySelector('.form-status');
+            if (!status) {
+                status = document.createElement('p');
+                status.className = 'form-status';
+                status.setAttribute('role', 'status');
+                status.setAttribute('aria-live', 'polite');
+                form.appendChild(status);
+            }
 
             try {
-                const response = await fetch(directEmailEndpoint, {
+                if (web3FormsAccessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+                    throw new Error('Email form setup is incomplete.');
+                }
+
+                const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    mode: 'cors',
                     body: JSON.stringify(payload)
                 });
+                const result = await response.json();
 
-                if (!response.ok) {
-                    throw new Error('Email service rejected the request');
+                if (!response.ok || !result.success) {
+                    throw new Error('Email service rejected the request.');
                 }
 
                 form.reset();
-                if (status) {
-                    status.textContent = 'Your message has been sent successfully.';
-                    status.style.color = '#0d7a43';
-                }
+                status.textContent = 'Your message has been sent successfully.';
+                status.style.color = '#0d7a43';
             } catch (error) {
-                const mailBody = [
-                    name ? `Name: ${name}` : '',
-                    email ? `Email: ${email}` : '',
-                    phone ? `Phone: ${phone}` : '',
-                    request ? `Message: ${request}` : ''
-                ].filter(Boolean).join('\n\n');
-
-                const mailSubject = encodeURIComponent('Website enquiry');
-                const encodedBody = encodeURIComponent(mailBody || 'No details provided.');
-                const fallbackUrl = `mailto:${recipientEmail}?subject=${mailSubject}&body=${encodedBody}`;
-
-                if (status) {
-                    status.textContent = 'The email service is unavailable right now. Your mail app is opening so you can send the message manually.';
-                    status.style.color = '#b21f2d';
-                }
-
-                window.location.href = fallbackUrl;
+                status.textContent = error.message === 'Email form setup is incomplete.'
+                    ? 'Email sending is not configured yet. Add your Web3Forms access key to script.js.'
+                    : 'We could not send your message. Please try again later.';
+                status.style.color = '#b21f2d';
             } finally {
                 if (submitButton) {
                     submitButton.disabled = false;
