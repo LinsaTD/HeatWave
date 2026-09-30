@@ -110,4 +110,83 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     cards.forEach(card => cardObserver.observe(card));
+
+    const recipientEmail = 'tdlinsa@gmail.com';
+    const directEmailEndpoint = 'https://formsubmit.co/ajax/' + recipientEmail;
+
+    document.querySelectorAll('.contact-form').forEach((form) => {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const name = String(formData.get('name') || '').trim();
+            const email = String(formData.get('email') || '').trim();
+            const phone = String(formData.get('phone') || '').trim();
+            const request = String(formData.get('request') || formData.get('message') || '').trim();
+
+            const payload = {
+                name,
+                email,
+                phone,
+                message: request,
+                _subject: 'Website enquiry',
+                _captcha: 'false'
+            };
+
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalLabel = submitButton ? submitButton.textContent : '';
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+            }
+
+            const status = form.querySelector('.form-status');
+
+            try {
+                const response = await fetch(directEmailEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Email service rejected the request');
+                }
+
+                form.reset();
+                if (status) {
+                    status.textContent = 'Your message has been sent successfully.';
+                    status.style.color = '#0d7a43';
+                }
+            } catch (error) {
+                const mailBody = [
+                    name ? `Name: ${name}` : '',
+                    email ? `Email: ${email}` : '',
+                    phone ? `Phone: ${phone}` : '',
+                    request ? `Message: ${request}` : ''
+                ].filter(Boolean).join('\n\n');
+
+                const mailSubject = encodeURIComponent('Website enquiry');
+                const encodedBody = encodeURIComponent(mailBody || 'No details provided.');
+                const fallbackUrl = `mailto:${recipientEmail}?subject=${mailSubject}&body=${encodedBody}`;
+
+                if (status) {
+                    status.textContent = 'The email service is unavailable right now. Your mail app is opening so you can send the message manually.';
+                    status.style.color = '#b21f2d';
+                }
+
+                window.location.href = fallbackUrl;
+            } finally {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalLabel;
+                }
+            }
+        });
+    });
 });

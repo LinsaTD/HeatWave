@@ -614,9 +614,9 @@ h1 {
 }
 
 .services-page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 9rem 5% 6rem;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 6rem;
 }
 
 .services-header {
@@ -640,6 +640,9 @@ h1 {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 5% 0;
 }
 
 .service-card {
@@ -1246,7 +1249,11 @@ h1 {
 
 .about-page,
 .inner-page {
-    padding-top: 9rem;
+    padding-top: 76px;
+}
+
+.about-page {
+    padding-top: 76px;
 }
 
 .inner-page main {
@@ -1254,17 +1261,94 @@ h1 {
     margin: auto;
 }
 
-.page-intro {
-    padding: 2rem 6% 3rem;
+.inner-page .page-banner,
+.about-page .page-banner {
+    position: relative;
+    left: 50%;
+    display: flex;
+    height: clamp(170px, 18vw, 220px);
+    width: 100vw;
+    margin-left: -50vw;
+    justify-content: center;
+    padding: 0 6%;
+    background-image: url('img/hero-img1.jpg');
+    background-position: center;
+    background-size: cover;
 }
 
-.page-intro h1 {
-    max-width: 800px;
+.inner-page .page-banner::before,
+.about-page .page-banner::before {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+    content: '';
 }
 
-.page-intro p {
-    max-width: 680px;
+.inner-page .hero-title-panel,
+.about-page .hero-title-panel {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 520px);
+    margin-top: auto;
+    margin-bottom: -36px;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    text-align: center;
+}
+
+.inner-page .page-banner h1,
+.about-page .page-banner h1 {
+    margin-bottom: .5rem;
+    color: #333;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.inner-page .page-banner p,
+.about-page .page-banner p {
+    max-width: 620px;
+    margin: 1rem auto 0;
     color: var(--muted);
+    line-height: 1.6;
+}
+
+.inner-page .page-banner + .content-section,
+.inner-page .page-banner + .service-card-grid {
+    padding-top: 6rem;
+}
+
+.inner-page .page-intro {
+    position: relative;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    min-height: clamp(320px, 38vw, 420px);
+    margin-left: -50vw;
+    padding: clamp(3rem, 7vw, 6rem) max(8%, calc((100vw - 1100px) / 2));
+    color: #fff;
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('img/hero-img1.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.inner-page .page-intro .eyebrow {
+    color: #fff;
+}
+
+.inner-page .page-intro h1 {
+    max-width: 800px;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-size: clamp(2.5rem, 5vw, 4.75rem);
+    line-height: 1.05;
+}
+
+.inner-page .page-intro p {
+    max-width: 680px;
+    color: rgba(255, 255, 255, .88);
     line-height: 1.8;
 }
 
@@ -1359,18 +1443,113 @@ h1 {
 }
 
 .about-page .intro {
-    padding-top: 2rem;
+    max-width: 1180px;
+    padding-top: 8rem;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: 3rem;
+    align-items: start;
 }
 
-.about-page .hero-title {
-    max-width: 1100px;
-    margin: auto;
-    padding: 0 6%;
+.about-page .about-visual {
+    max-width: 100%;
+    margin: 0;
+    align-self: start;
 }
 
-.about-page .hero-title h1 {
-    font-size: clamp(3rem, 8vw, 6rem);
-    margin-bottom: 1rem;
+.about-page .about-copy {
+    width: 100%;
+    margin-left: 0;
+    align-self: start;
+}
+
+.about-page .service-grid {
+    width: 100%;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: .85rem;
+}
+
+.about-page .service-grid a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 58px;
+    padding: .9rem .85rem;
+    font-size: .7rem;
+    line-height: 1.3;
+}
+
+.inner-page .breadcrumbs,
+.about-page .breadcrumbs {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .55rem;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    color: #888;
+    background: transparent;
+    font-size: .9rem;
+    box-shadow: none;
+}
+
+.inner-page .breadcrumbs a,
+.about-page .breadcrumbs a {
+    color: var(--red);
+    text-decoration: none;
+}
+
+.inner-page .breadcrumbs a:hover,
+.inner-page .breadcrumbs a:focus-visible,
+.about-page .breadcrumbs a:hover,
+.about-page .breadcrumbs a:focus-visible {
+    color: var(--red-dark);
+}
+
+@media (max-width: 700px) {
+    .about-page,
+    .inner-page {
+        padding-top: 64px;
+    }
+
+    .about-page .page-banner,
+    .inner-page .page-banner {
+        height: 280px;
+    }
+
+    .inner-page .page-intro {
+        min-height: 320px;
+        padding-right: 8%;
+        padding-left: 8%;
+    }
+
+    .about-page .hero-title-panel,
+    .inner-page .hero-title-panel {
+        margin-bottom: -48px;
+    }
+
+    .about-page .intro,
+    .inner-page .page-banner + .content-section,
+    .inner-page .page-banner + .service-card-grid {
+        padding-top: 6rem;
+    }
+
+    .about-page .intro {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about-page .about-copy {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .about-page .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 900px) {
@@ -1534,12 +1713,6 @@ h1 {
         grid-column: 1 / -1;
     }
 
-    .about-page,
-    .inner-page {
-        padding-top: 7rem;
-    }
-
-    .page-intro,
     .content-section {
         padding-left: 8%;
         padding-right: 8%;
@@ -1918,7 +2091,7 @@ h1 {
 
 @media (max-width: 700px) {
     .services-page {
-        padding: 7rem 8% 4rem;
+        padding: 0 0 4rem;
     }
 
     .services-header {
@@ -1927,6 +2100,8 @@ h1 {
 
     .service-card-grid {
         grid-template-columns: 1fr;
+        padding-right: 8%;
+        padding-left: 8%;
     }
 
     .service-card-image {
