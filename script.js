@@ -18,7 +18,7 @@ dots.forEach((dot, index) => {
 	});
 });
 
-if (slides.length) setInterval(() => showSlide((current + 1) % slides.length), 5000);
+if (slides.length) setInterval(() => showSlide((current + 1) % slides.length), 4300);
 
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
@@ -111,7 +111,95 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach(card => cardObserver.observe(card));
 
-    const web3FormsAccessKey = 'YOUR_WEB3FORMS_ACCESS_KEY';
+    const portfolioTabs = document.querySelectorAll('.portfolio-tab');
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+    const setActivePortfolioTab = (filter) => {
+        portfolioTabs.forEach((tab) => {
+            const isActive = tab.dataset.filter === filter;
+            tab.classList.toggle('active', isActive);
+            tab.setAttribute('aria-selected', String(isActive));
+            tab.tabIndex = isActive ? 0 : -1;
+        });
+
+        portfolioCards.forEach((card) => {
+            const shouldShow = filter === 'all' || card.dataset.category === filter;
+            card.hidden = !shouldShow;
+        });
+    };
+
+    portfolioTabs.forEach((tab) => {
+        tab.addEventListener('click', () => setActivePortfolioTab(tab.dataset.filter));
+    });
+
+    if (portfolioTabs.length) {
+        setActivePortfolioTab('all');
+    }
+
+    const portfolioLightbox = document.querySelector('.portfolio-lightbox');
+
+    if (portfolioLightbox instanceof HTMLDialogElement) {
+        const lightboxImage = portfolioLightbox.querySelector('.lightbox-image');
+        const lightboxTitle = portfolioLightbox.querySelector('#lightbox-title');
+        const lightboxClient = portfolioLightbox.querySelector('.lightbox-client');
+        const lightboxScope = portfolioLightbox.querySelector('.lightbox-scope');
+        const lightboxProjectLink = portfolioLightbox.querySelector('.lightbox-project-link');
+        const lightboxClose = portfolioLightbox.querySelector('.lightbox-close');
+
+        portfolioCards.forEach((card) => {
+            card.addEventListener('click', () => {
+                const image = card.querySelector('img');
+                if (!image || !lightboxImage || !lightboxTitle || !lightboxClient || !lightboxScope) return;
+
+                lightboxImage.src = image.currentSrc || image.src;
+                lightboxImage.alt = image.alt;
+                lightboxTitle.textContent = card.querySelector('.portfolio-card-overlay strong')?.textContent?.trim() || image.alt;
+                lightboxClient.textContent = card.dataset.client || '';
+                lightboxScope.textContent = card.dataset.scope || '';
+
+                if (lightboxProjectLink instanceof HTMLAnchorElement) {
+                    const projectUrl = card.dataset.projectUrl;
+                    lightboxProjectLink.hidden = !projectUrl;
+                    if (projectUrl) lightboxProjectLink.href = projectUrl;
+                }
+
+                portfolioLightbox.showModal();
+            });
+        });
+
+        lightboxClose?.addEventListener('click', () => portfolioLightbox.close());
+        portfolioLightbox.addEventListener('click', (event) => {
+            if (event.target === portfolioLightbox) portfolioLightbox.close();
+        });
+    }
+
+    const marquee = document.querySelector('.client-marquee');
+    const marqueeTrack = document.querySelector('.client-track');
+    const marqueeButtons = document.querySelectorAll('.client-scroll-btn');
+
+    if (marquee && marqueeTrack && marqueeButtons.length) {
+        let marqueeOffset = 0;
+        const step = marquee.clientWidth * 0.55;
+
+        const updateMarqueePosition = () => {
+            const maxOffset = Math.max(0, marqueeTrack.scrollWidth - marquee.clientWidth);
+            marqueeOffset = Math.min(Math.max(marqueeOffset, 0), maxOffset);
+            marqueeTrack.style.animation = 'none';
+            marqueeTrack.style.transform = `translateX(-${marqueeOffset}px)`;
+        };
+
+        marqueeButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const direction = button.dataset.scroll === 'prev' ? -1 : 1;
+                marqueeOffset += direction * step;
+                updateMarqueePosition();
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            updateMarqueePosition();
+        });
+    }
 
     document.querySelectorAll('.contact-form').forEach((form) => {
         form.addEventListener('submit', async (event) => {
@@ -124,12 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const request = String(formData.get('request') || formData.get('message') || '').trim();
 
             const payload = {
-                access_key: web3FormsAccessKey,
                 name,
                 email,
                 phone,
                 message: request,
-                subject: formData.has('phone') ? 'Website callback request' : 'Website contact enquiry'
+                form_type: formData.has('phone') ? 'callback' : 'contact'
             };
 
             const submitButton = form.querySelector('button[type="submit"]');
@@ -150,11 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                if (web3FormsAccessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-                    throw new Error('Email form setup is incomplete.');
-                }
-
-                const response = await fetch('https://api.web3forms.com/submit', {
+                const response = await fetch('send-email.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -162,19 +245,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     body: JSON.stringify(payload)
                 });
-                const result = await response.json();
+                let result;
+                try {
+                    result = await response.json();
+                } catch (parseError) {
+                    throw new Error('The PHP email endpoint was not found. Deploy the site to PHP-enabled hosting.');
+                }
 
                 if (!response.ok || !result.success) {
-                    throw new Error('Email service rejected the request.');
+                    throw new Error(result.message || 'We could not send your message. Please try again later.');
                 }
 
                 form.reset();
                 status.textContent = 'Your message has been sent successfully.';
                 status.style.color = '#0d7a43';
             } catch (error) {
-                status.textContent = error.message === 'Email form setup is incomplete.'
-                    ? 'Email sending is not configured yet. Add your Web3Forms access key to script.js.'
-                    : 'We could not send your message. Please try again later.';
+                status.textContent = error instanceof TypeError
+                    ? 'The PHP email endpoint could not be reached. Deploy the site to PHP-enabled hosting.'
+                    : error.message;
                 status.style.color = '#b21f2d';
             } finally {
                 if (submitButton) {
