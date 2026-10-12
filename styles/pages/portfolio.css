@@ -1,0 +1,277 @@
+/* Page-specific styles: portfolio */
+
+
+.portfolio-tabs-section {
+    padding-top: 3rem;
+}
+
+
+
+.portfolio-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin: 2rem 0 2.5rem;
+}
+
+
+
+.portfolio-tab {
+    padding: .8rem 1.2rem;
+    border: 1px solid var(--line);
+    background: var(--white);
+    color: var(--ink);
+    font: inherit;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+}
+
+
+
+.portfolio-tab:hover,
+.portfolio-tab:focus-visible {
+    border-color: var(--red);
+    color: var(--red);
+    transform: translateY(-1px);
+}
+
+
+
+.portfolio-tab.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+    box-shadow: 0 10px 22px rgba(180, 35, 47, .2);
+}
+
+
+
+.portfolio-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    background: #111;
+    box-shadow: 0 10px 24px rgba(17, 17, 17, .1);
+    color: var(--white);
+    cursor: pointer;
+    text-align: left;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.portfolio-card:hover,
+.portfolio-card:focus-visible {
+    box-shadow: 0 18px 30px rgba(17, 17, 17, .2);
+    transform: translateY(-6px);
+}
+
+.portfolio-card:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 4px;
+}
+
+.portfolio-card[hidden] {
+    display: none;
+}
+
+.portfolio-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .55s ease;
+}
+
+.portfolio-card:hover img,
+.portfolio-card:focus-visible img {
+    transform: scale(1.06);
+}
+
+.portfolio-card-overlay {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    padding: 2rem 1.25rem 1.25rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .88));
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .3s ease, transform .3s ease;
+}
+
+.portfolio-card:hover .portfolio-card-overlay,
+.portfolio-card:focus-visible .portfolio-card-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.portfolio-card-overlay strong {
+    color: var(--white);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.portfolio-card-overlay small {
+    color: rgba(255, 255, 255, .8);
+    font-size: .78rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.portfolio-lightbox {
+    width: 100vw;
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: #111;
+    color: var(--white);
+}
+
+.portfolio-lightbox[open] {
+    animation: lightbox-enter .35s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.portfolio-lightbox::backdrop {
+    background: rgba(5, 8, 14, .86);
+    backdrop-filter: blur(6px);
+    animation: backdrop-enter .3s ease both;
+}
+
+.lightbox-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+    width: 100%;
+    height: 100%;
+}
+
+.lightbox-image {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: contain;
+    background: #090909;
+}
+
+.lightbox-details {
+    align-self: center;
+    padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.lightbox-details .eyebrow {
+    margin-bottom: .8rem;
+    color: #f0a2aa;
+}
+
+.lightbox-details h2 {
+    margin-bottom: 1.75rem;
+    font-size: clamp(1.5rem, 2.5vw, 2.3rem);
+    line-height: 1.15;
+}
+
+.lightbox-details p:not(.eyebrow) {
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, .82);
+    line-height: 1.6;
+}
+
+.lightbox-details .lightbox-description {
+    color: rgba(255, 255, 255, .72);
+}
+
+.lightbox-details p strong {
+    color: var(--white);
+}
+
+.lightbox-project-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: #f0a2aa;
+}
+
+.lightbox-project-link[hidden] {
+    display: none;
+}
+
+.lightbox-close {
+    position: absolute;
+    z-index: 1;
+    top: .75rem;
+    right: .75rem;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .65);
+    color: var(--white);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+    background: var(--red);
+}
+
+@keyframes lightbox-enter {
+    from {
+        opacity: 0;
+        transform: scale(.96) translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes backdrop-enter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 760px) {
+    .lightbox-content {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 1fr) auto;
+    }
+
+    .lightbox-details {
+        padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .lightbox-details h2 {
+        margin-bottom: .75rem;
+    }
+
+    .lightbox-details p:not(.eyebrow) {
+        margin-top: .5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .portfolio-card,
+    .portfolio-card img,
+    .portfolio-card-overlay {
+        transition: none;
+    }
+
+    .portfolio-lightbox[open],
+    .portfolio-lightbox::backdrop {
+        animation: none;
+    }
+}
+}

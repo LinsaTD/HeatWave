@@ -1,0 +1,24 @@
+.inner-page .hvac-intro {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('../../img/service-img4.jpg');
+}
+
+.inner-page .ac-duct-intro {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('../../img/service-img3.jpg');
+}
+
+.inner-page .hvac-amc-intro {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('../../img/service-img4.jpg');
+}
+
+.inner-page .ac-duct-amc-intro {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('../../img/service-img3.jpg');
+}
+
+.trade-works-detail {
+    grid-template-columns: 1fr;
+}
+
+.trade-works-detail .service-detail-content {
+    max-width: 900px;
+    margin: 0 auto;
+}

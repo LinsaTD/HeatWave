@@ -1,0 +1,85 @@
+/* Page-specific styles: about */
+
+
+.about-page {
+    padding-top: 76px;
+}
+
+
+
+.about-page .intro {
+    max-width: 1180px;
+    padding-top: 8rem;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: 3rem;
+    align-items: start;
+}
+
+
+
+.about-page .about-visual {
+    max-width: 100%;
+    margin: 0;
+    align-self: start;
+}
+
+
+
+.about-page .about-copy {
+    width: 100%;
+    margin-left: 0;
+    align-self: start;
+}
+
+
+
+.about-page .service-grid {
+    width: 100%;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: .85rem;
+}
+
+
+
+.about-page .service-grid a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 58px;
+    height: 100%;
+    padding: .9rem .85rem;
+    font-size: .7rem;
+    line-height: 1.3;
+}
+
+@media (max-width: 700px)
+{
+
+
+    .about-page .intro {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 700px)
+{
+
+
+    .about-page .about-copy {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 700px)
+{
+
+
+    .about-page .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
