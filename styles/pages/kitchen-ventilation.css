@@ -17,3 +17,7 @@
     max-width: 900px;
     margin: 0 auto;
 }
+
+.kitchen-detail .service-detail-content .core-services-heading {
+    margin-top: 2rem;
+}

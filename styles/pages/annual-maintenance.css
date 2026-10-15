@@ -1,5 +1,131 @@
 /* Page-specific styles: annual-maintenance */
 
+.inner-page main {
+    background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 18%, #ffffff 100%);
+}
+
+.content-section {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+}
+
+.service-intro-block {
+    margin: 0 auto 1.5rem;
+    max-width: 860px;
+    padding: 1.35rem 1.5rem;
+    background: linear-gradient(135deg, rgba(178, 31, 45, 0.04), rgba(17, 17, 17, 0.02));
+    border: 1px solid rgba(178, 31, 45, 0.12);
+    border-left: 4px solid #b21f2d;
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(17, 17, 17, 0.04);
+}
+
+.service-intro-block p {
+    color: #2a2a2a;
+    line-height: 1.8;
+}
+
+.service-intro-block p + p {
+    margin-top: 0.9rem;
+}
+
+.content-section .service-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
 .content-section .service-grid a {
-    min-height: 230px;
+    position: relative;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem 1.4rem 1.1rem;
+    border: 1px solid #e8e8e8;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #fff7f7 100%);
+    box-shadow: 0 14px 30px rgba(17, 17, 17, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    overflow: hidden;
+}
+
+.content-section .service-grid a::before {
+    content: "";
+    position: absolute;
+    inset: auto 1rem 1rem 1rem;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #b21f2d, rgba(178, 31, 45, 0.15));
+    opacity: 0.9;
+}
+
+.content-section .service-grid a:hover,
+.content-section .service-grid a:focus-visible {
+    transform: translateY(-5px);
+    border-color: rgba(178, 31, 45, 0.4);
+    background: linear-gradient(180deg, #b21f2d 0%, #8d1622 100%);
+    box-shadow: 0 22px 35px rgba(178, 31, 45, 0.2);
+}
+
+.content-section .service-grid a h3 {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 0.8rem;
+    color: #111;
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+}
+
+.content-section .service-grid a p {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: #555;
+    font-size: 0.94rem;
+    line-height: 1.7;
+}
+
+.content-section .service-grid a > span {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin-top: 1rem;
+    border-radius: 50%;
+    color: #b21f2d;
+    background: rgba(178, 31, 45, 0.08);
+    font-size: 1.4rem;
+    font-weight: 700;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.content-section .service-grid a:hover h3,
+.content-section .service-grid a:hover p,
+.content-section .service-grid a:focus-visible h3,
+.content-section .service-grid a:focus-visible p,
+.content-section .service-grid a:hover > span,
+.content-section .service-grid a:focus-visible > span {
+    color: #fff;
+}
+
+.content-section .service-grid a:hover > span,
+.content-section .service-grid a:focus-visible > span {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    .content-section .service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-intro-block {
+        padding: 1.1rem 1rem;
+    }
 }

@@ -3,6 +3,11 @@
 
 .inner-page .fire-alarm-intro {
     background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('../../img/portfolio-fire-face1.jpg');
+    min-height: clamp(380px, 44vw, 500px);
+}
+
+.inner-page .fire-alarm-intro p {
+    max-width: 780px;
 }
 
 
@@ -16,4 +21,15 @@
 .fire-alarm-detail .service-detail-content {
     max-width: 900px;
     margin: 0 auto;
+}
+
+.fire-alarm-detail .core-services-heading {
+    margin-top: 2rem;
+    padding: 0 0 .5rem 0;
+    color: var(--ink);
+    font-size: 1.35rem;
+}
+
+.fire-alarm-detail .feature-list h3 strong {
+    color: var(--red-dark);
 }

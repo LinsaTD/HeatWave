@@ -1,14 +1,15 @@
 /* Page-specific styles: request-callback */
 
 .callback-layout {
+    max-width: 900px;
+    margin-inline: auto;
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
-    gap: 4rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
     align-items: start;
 }
 
 .callback-notice {
-    grid-column: 1;
     padding: 1rem 1.25rem;
     border: 1px solid rgba(180, 35, 47, .2);
     border-left: 4px solid var(--red);
@@ -27,52 +28,44 @@
     width: 100%;
     max-width: none;
     margin-top: 0;
-    grid-column: 1;
-    grid-row: 2;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--white);
+    box-shadow: 0 12px 32px rgba(17, 17, 17, .08);
 }
 
-.callback-address {
-    display: grid;
-    gap: 1rem;
-    line-height: 1.6;
-    grid-column: 2;
-    grid-row: 1 / span 2;
-}
-
-.callback-address h2 {
-    margin-bottom: .25rem;
-}
-
-.callback-address strong {
-    color: var(--red);
-}
-
-.callback-address a {
+.callback-layout .contact-form label {
+    gap: .55rem;
     color: var(--ink);
-    text-decoration: none;
+    font-size: .85rem;
 }
 
-.callback-address a:hover,
-.callback-address a:focus-visible {
-    color: var(--red);
+.callback-layout .contact-form input,
+.callback-layout .contact-form textarea {
+    padding: .9rem 1rem;
+    border: 1px solid #d7d7d7;
+    border-radius: 6px;
+    transition: border-color .2s ease, box-shadow .2s ease;
 }
 
-.callback-office {
-    display: grid;
-    align-content: start;
-    gap: .35rem;
+.callback-layout .contact-form input:focus,
+.callback-layout .contact-form textarea:focus {
+    border-color: var(--red);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(178, 31, 45, .14);
 }
 
-@media (max-width: 900px) {
-    .callback-layout {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
+.callback-layout .contact-form textarea {
+    min-height: 170px;
+}
 
-    .callback-notice,
-    .callback-layout .contact-form,
-    .callback-address {
-        grid-column: 1;
-        grid-row: auto;
+.callback-layout .contact-form .button {
+    justify-self: start;
+}
+
+@media (max-width: 600px) {
+    .callback-layout .contact-form .button {
+        width: 100%;
     }
 }

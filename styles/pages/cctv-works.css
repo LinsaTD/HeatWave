@@ -17,3 +17,12 @@
     max-width: 900px;
     margin: 0 auto;
 }
+
+
+.cctv-detail .core-services-heading{
+margin-top: 2rem;
+    padding: 0 0 .5rem 0;
+    color: var(--ink);
+    font-size: 1.35rem;
+
+}

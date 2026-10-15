@@ -22,3 +22,14 @@
     max-width: 900px;
     margin: 0 auto;
 }
+
+.trade-works-detail .service-detail-content > p:first-of-type {
+    margin-top: 0;
+}
+
+.trade-works-detail .core-services-heading {
+    margin-top: 2rem;
+    padding: 0 0 .5rem 0;
+    color: var(--ink);
+    font-size: 1.35rem;
+}
