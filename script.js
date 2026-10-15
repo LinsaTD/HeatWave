@@ -143,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const lightboxTitle = portfolioLightbox.querySelector('#lightbox-title');
         const lightboxClient = portfolioLightbox.querySelector('.lightbox-client');
         const lightboxScope = portfolioLightbox.querySelector('.lightbox-scope');
+        const lightboxDescription = portfolioLightbox.querySelector('.lightbox-description');
         const lightboxProjectLink = portfolioLightbox.querySelector('.lightbox-project-link');
         const lightboxClose = portfolioLightbox.querySelector('.lightbox-close');
 
@@ -156,6 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 lightboxTitle.textContent = card.querySelector('.portfolio-card-overlay strong')?.textContent?.trim() || image.alt;
                 lightboxClient.textContent = card.dataset.client || '';
                 lightboxScope.textContent = card.dataset.scope || '';
+
+                if (lightboxDescription instanceof HTMLElement) {
+                    const description = card.dataset.description || '';
+                    lightboxDescription.textContent = description;
+                    lightboxDescription.hidden = !description;
+                }
 
                 if (lightboxProjectLink instanceof HTMLAnchorElement) {
                     const projectUrl = card.dataset.projectUrl;
