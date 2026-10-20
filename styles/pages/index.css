@@ -355,6 +355,15 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 1.25rem 1.35rem 1.4rem;
+    background: #fff;
+    transition: background-color .18s ease, color .18s ease;
+}
+
+.explore-service-card:hover .explore-service-copy,
+.explore-service-card > a:hover .explore-service-copy,
+.explore-service-card:focus-within .explore-service-copy {
+    color: #fff;
+    background-color: #b21f2d;
 }
 
 .explore-service-copy h3 {
@@ -362,6 +371,7 @@
     color: var(--ink);
     font-size: 1.1rem;
     line-height: 1.3;
+    transition: color .25s ease;
 }
 
 .explore-service-copy p {
@@ -369,6 +379,7 @@
     color: #625d59;
     font-size: .9rem;
     line-height: 1.6;
+    transition: color .25s ease;
 }
 
 .explore-service-copy > span {
@@ -379,6 +390,19 @@
     color: var(--red);
     font-size: .82rem;
     font-weight: 700;
+    transition: color .25s ease;
+}
+
+.explore-service-card:hover .explore-service-copy h3,
+.explore-service-card:hover .explore-service-copy p,
+.explore-service-card:hover .explore-service-copy > span,
+.explore-service-card > a:hover .explore-service-copy h3,
+.explore-service-card > a:hover .explore-service-copy p,
+.explore-service-card > a:hover .explore-service-copy > span,
+.explore-service-card:focus-within .explore-service-copy h3,
+.explore-service-card:focus-within .explore-service-copy p,
+.explore-service-card:focus-within .explore-service-copy > span {
+    color: #fff;
 }
 
 .explore-service-copy > span b {
@@ -400,8 +424,9 @@
 }
 
 .hero {
-    height: 100vh;
-    min-height: 620px;
+    min-height: 460px;
+    height: max(0px, calc(100vh - var(--contact-header-height) - var(--nav-height) - var(--mobile-social-height)));
+    height: max(460px, calc(100svh - var(--contact-header-height) - var(--nav-height) - var(--mobile-social-height)));
     position: relative;
     overflow: hidden;
     color: #fff;
@@ -429,53 +454,61 @@
     transform: scale(1);
 }
 
+.slide:not(.active) .hero-content {
+    visibility: hidden;
+}
+
 
 
 .slide::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .12));
+    background: linear-gradient(90deg, rgba(0, 0, 0, .78) 0%, rgba(0, 0, 0, .58) 48%, rgba(0, 0, 0, .18) 100%);
 }
 
 
 
 .slide:nth-child(1) {
-    background-image: url('../../img/Logo/LogoBackground.png');
+    background-image: url('../../images/Home Page Slide Show Banner Images/1. Heat Wave.png');
 }
 
 .slide:nth-child(2) {
-    background-image: url('../../img/hero-img1.jpg');
+    background-image: url('../../images/Home Page Slide Show Banner Images/2. Dubai Civil Defence approved.png');
 }
 
 
 
 .slide:nth-child(3) {
-    background-image: url('../../img/hero-img2.png');
+    background-image: url('../../images/Home Page Slide Show Banner Images/3. Certified Protection.jpg');
 }
 
 
 
 .slide:nth-child(4) {
-    background-image: url('../../img/hero-img3.jpg');
+    background-image: url('../../images/Home Page Slide Show Banner Images/4. Complete Life Safety.png');
 }
 
 
 
 .slide:nth-child(5) {
-    background-image: url('../../img/hero-img4.jpg');
+    background-image: url('../../images/Home Page Slide Show Banner Images/7. Firestop Sealant Solutions.png');
 }
 
 
 
 .slide:nth-child(6) {
-    background-image: url('../../img/hero-img5.jpg');
+    background-image: url('../../images/Home Page Slide Show Banner Images/6. Smoke Control Engineering.png');
 }
 
 
 
 .slide:nth-child(7) {
-    background-image: url('../../img/hero-img6.jpg');
+    background-image: url('../../images/Home Page Slide Show Banner Images/5. Commercial Ventilation.png');
+}
+
+.slide:nth-child(8) {
+    background-image: url('../../images/Home Page Slide Show Banner Images/8. Security Systems.png');
 }
 
 
@@ -483,32 +516,36 @@
 .hero-content {
     position: relative;
     z-index: 1;
-    width: min(78vw, 1120px);
+    width: 100%;
+    max-width: 1440px;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 76px 6% 0 12%;
-    max-width: none;
+    padding: 0 clamp(2rem, 9vw, 8rem);
 }
 
 
 
 .hero h1 {
-    max-width: 1000px;
-    font-size: clamp(2.8rem, 4.8vw, 5.8rem);
+    max-width: 900px;
+    font-size: clamp(2.5rem, 5vw, 5rem);
     line-height: .98;
-    overflow-wrap: anywhere;
+    text-wrap: balance;
     opacity: 0;
     transform: translateY(20px);
-    animation: heroTextReveal .8s ease forwards .15s;
 }
 
-
+.slide.active .hero-content h1 {
+    animation: heroTextReveal .8s ease forwards .15s;
+}
 
 .hero-content .eyebrow {
     opacity: 0;
     transform: translateY(16px);
+}
+
+.slide.active .hero-content .eyebrow {
     animation: heroTextReveal .7s ease forwards;
 }
 
@@ -519,8 +556,13 @@
     font-size: 1.1rem;
     line-height: 1.6;
     color: #eee;
+    text-align: left;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .7);
     opacity: 0;
     transform: translateY(18px);
+}
+
+.slide.active .hero-content p {
     animation: heroTextReveal .8s ease forwards .25s;
 }
 
@@ -1315,18 +1357,8 @@
 {
 
 
-    .hero {
-        min-height: 650px;
-    }
-}
-
-@media (max-width: 700px)
-{
-
-
     .hero-content {
-        width: 100%;
-        padding: 76px 8% 100px 22%;
+        padding: 0 8% 3.5rem;
     }
 
 }
@@ -1337,7 +1369,7 @@
 
     .hero h1 {
         max-width: 100%;
-        font-size: clamp(2rem, 8.5vw, 4.2rem);
+        font-size: clamp(2rem, 8vw, 3.6rem);
         line-height: 1;
     }
 }
@@ -1347,13 +1379,12 @@
 
 
     .dots {
-        top: 50%;
-        left: 4%;
+        left: 50%;
         right: auto;
-        bottom: auto;
-        flex-direction: column;
-        gap: 6px;
-        transform: translateY(-50%);
+        bottom: 1.25rem;
+        flex-direction: row;
+        gap: 9px;
+        transform: translateX(-50%);
     }
 }
 

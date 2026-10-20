@@ -2,7 +2,7 @@
 
 
 .inner-page .fire-alarm-intro {
-    background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('../../img/portfolio-fire-face1.jpg');
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('../../images/Services/1.png');
     min-height: clamp(380px, 44vw, 500px);
 }
 

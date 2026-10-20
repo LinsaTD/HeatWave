@@ -1,131 +1,238 @@
 /* Page-specific styles: annual-maintenance */
 
 .inner-page main {
-    background: linear-gradient(180deg, #f6f8fb 0%, #ffffff 18%, #ffffff 100%);
+    background: linear-gradient(180deg, #fff 0%, #f7f7f7 100%);
+}
+
+.inner-page .page-intro.annual-maintenance-intro {
+    min-height: 220px;
+    padding: 2.5rem max(6%, calc((100vw - 1100px) / 2));
+    background-position: center 44%;
+}
+
+.inner-page .page-intro.annual-maintenance-intro h1 {
+    max-width: 900px;
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    line-height: 1.08;
+    letter-spacing: .08em;
+}
+
+.inner-page .page-intro.annual-maintenance-intro p {
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .content-section {
-    padding-top: 2rem;
-    padding-bottom: 5rem;
+    padding: 4rem 6% 5rem;
+}
+
+.content-section > h2 {
+    max-width: 1100px;
+    margin: 0 auto 1.5rem;
+    color: var(--ink);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.1;
 }
 
 .service-intro-block {
-    margin: 0 auto 1.5rem;
-    max-width: 860px;
-    padding: 1.35rem 1.5rem;
-    background: linear-gradient(135deg, rgba(178, 31, 45, 0.04), rgba(17, 17, 17, 0.02));
-    border: 1px solid rgba(178, 31, 45, 0.12);
-    border-left: 4px solid #b21f2d;
-    border-radius: 14px;
-    box-shadow: 0 12px 28px rgba(17, 17, 17, 0.04);
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 
 .service-intro-block p {
-    color: #2a2a2a;
+    max-width: 900px;
+    color: #4b4b4b;
+    font-size: 1.02rem;
     line-height: 1.8;
 }
 
 .service-intro-block p + p {
-    margin-top: 0.9rem;
+    margin-top: 1rem;
 }
 
 .content-section .service-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-    margin-top: 1.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .content-section .service-grid a {
     position: relative;
-    min-height: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1.5rem 1.4rem 1.1rem;
-    border: 1px solid #e8e8e8;
-    border-radius: 18px;
-    background: linear-gradient(180deg, #ffffff 0%, #fff7f7 100%);
-    box-shadow: 0 14px 30px rgba(17, 17, 17, 0.06);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    isolation: isolate;
+    display: grid;
+    grid-template-rows: auto minmax(9rem, auto);
+    min-width: 0;
+    min-height: 0;
     overflow: hidden;
-}
-
-.content-section .service-grid a::before {
-    content: "";
-    position: absolute;
-    inset: auto 1rem 1rem 1rem;
-    height: 3px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #b21f2d, rgba(178, 31, 45, 0.15));
-    opacity: 0.9;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--red);
+    box-shadow: 0 10px 24px rgba(17, 17, 17, .08);
+    text-decoration: none;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
 
 .content-section .service-grid a:hover,
 .content-section .service-grid a:focus-visible {
-    transform: translateY(-5px);
-    border-color: rgba(178, 31, 45, 0.4);
-    background: linear-gradient(180deg, #b21f2d 0%, #8d1622 100%);
-    box-shadow: 0 22px 35px rgba(178, 31, 45, 0.2);
+    transform: translateY(-3px);
+    border-color: rgba(178, 31, 45, .4);
+    box-shadow: 0 14px 30px rgba(17, 17, 17, .12);
 }
 
-.content-section .service-grid a h3 {
-    position: relative;
-    z-index: 1;
-    margin: 0 0 0.8rem;
-    color: #111;
-    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
-    line-height: 1.35;
-    letter-spacing: -0.02em;
-}
-
-.content-section .service-grid a p {
-    position: relative;
-    z-index: 1;
+.content-section .service-grid .amc-service-image {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
     margin: 0;
-    color: #555;
-    font-size: 0.94rem;
-    line-height: 1.7;
+    object-fit: cover;
+    object-position: center;
+    transition: transform .45s ease;
 }
 
-.content-section .service-grid a > span {
+.content-section .service-grid a::before {
     position: relative;
+    z-index: 0;
+    display: block;
+    width: auto;
+    height: auto;
+    grid-row: 1;
+    aspect-ratio: 16 / 10;
+    border: 0;
+    content: "";
+}
+
+.content-section .service-grid a::after {
+    position: absolute;
     z-index: 1;
+    inset: 0;
+    background: linear-gradient(145deg, rgba(78, 12, 22, .86), rgba(178, 31, 45, .72));
+    content: "";
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.content-section .service-grid a:hover::after,
+.content-section .service-grid a:focus-visible::after {
+    opacity: 1;
+}
+
+.content-section .service-grid a:hover .amc-service-image,
+.content-section .service-grid a:focus-visible .amc-service-image {
+    transform: scale(1.06);
+}
+
+.content-section .service-grid .amc-service-card-content h3,
+.content-section .service-grid .amc-service-card-content p {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    color: var(--white);
+}
+
+.content-section .service-grid .amc-service-card-content h3 {
+    padding: 1.1rem 1.15rem .55rem;
+    font-size: 1.02rem;
+    line-height: 1.35;
+}
+
+.content-section .service-grid .amc-service-card-content p {
+    padding: 0 1.15rem 1.25rem;
+    color: rgba(255, 255, 255, .9);
+    font-size: .9rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.content-section .service-grid .amc-service-card-content {
+    position: relative;
+    z-index: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    min-height: 9rem;
+    padding-bottom: 3.5rem;
+    border-top: 3px solid var(--red);
+    color: var(--white);
+    background: var(--red);
+    transition: border-color .3s ease, background-color .3s ease;
+}
+
+.content-section .service-grid .amc-service-card-content > span {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    margin-top: 1rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid rgba(255, 255, 255, .55);
     border-radius: 50%;
-    color: #b21f2d;
-    background: rgba(178, 31, 45, 0.08);
-    font-size: 1.4rem;
-    font-weight: 700;
-    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+    color: var(--white);
+    background: rgba(255, 255, 255, .12);
+    font-size: 1.25rem;
+    transition: transform .25s ease, background-color .25s ease;
 }
 
-.content-section .service-grid a:hover h3,
-.content-section .service-grid a:hover p,
-.content-section .service-grid a:focus-visible h3,
-.content-section .service-grid a:focus-visible p,
-.content-section .service-grid a:hover > span,
-.content-section .service-grid a:focus-visible > span {
-    color: #fff;
+.content-section .service-grid a:hover .amc-service-card-content > span,
+.content-section .service-grid a:focus-visible .amc-service-card-content > span {
+    transform: translateX(3px);
+    background: rgba(255, 255, 255, .22);
 }
 
-.content-section .service-grid a:hover > span,
-.content-section .service-grid a:focus-visible > span {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateX(5px);
+.content-section .service-grid a:hover .amc-service-card-content,
+.content-section .service-grid a:focus-visible .amc-service-card-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .55rem;
+    padding: 1.25rem;
+    border-color: rgba(255, 255, 255, .6);
+    background: transparent;
+}
+
+.content-section .service-grid a:hover .amc-service-card-content h3,
+.content-section .service-grid a:focus-visible .amc-service-card-content h3,
+.content-section .service-grid a:hover .amc-service-card-content p,
+.content-section .service-grid a:focus-visible .amc-service-card-content p {
+    padding: 0;
 }
 
 @media (max-width: 768px) {
+    .content-section {
+        padding: 3rem 6% 4rem;
+    }
+
     .content-section .service-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .service-intro-block {
         padding: 1.1rem 1rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .inner-page .page-intro.annual-maintenance-intro {
+        min-height: 280px;
+        padding-right: 8%;
+        padding-left: 8%;
+    }
+
+    .content-section .service-grid {
+        grid-template-columns: 1fr;
     }
 }
