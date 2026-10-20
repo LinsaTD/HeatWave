@@ -22,12 +22,47 @@ if (slides.length) setInterval(() => showSlide((current + 1) % slides.length), 4
 
 const menu = document.querySelector('.menu');
 const navLinks = document.querySelector('.nav-links');
+const contactHeader = document.querySelector('.contact-header');
+const contactHeaderSocials = contactHeader?.querySelector('.contact-header-socials');
+const contactHeaderBrand = contactHeader?.querySelector('.contact-header-brand');
+const nav = document.querySelector('nav');
+const callbackLink = navLinks?.querySelector('.nav-cta');
+const callbackItem = callbackLink?.parentElement;
+
+if (contactHeader && contactHeaderSocials && contactHeaderBrand && nav && navLinks && callbackItem && menu) {
+	const mobileNavigation = window.matchMedia('(max-width: 1300px)');
+	const updateMobileHeader = () => {
+		if (mobileNavigation.matches) {
+			nav.insertBefore(contactHeaderBrand, menu);
+			callbackItem.append(contactHeaderSocials);
+		} else {
+			contactHeader.insertBefore(contactHeaderBrand, contactHeader.firstElementChild);
+			contactHeader.append(contactHeaderSocials);
+		}
+	};
+
+	updateMobileHeader();
+	mobileNavigation.addEventListener('change', updateMobileHeader);
+}
 
 if (menu && navLinks) {
+	const closeMenu = document.createElement('button');
+	closeMenu.className = 'menu-close';
+	closeMenu.type = 'button';
+	closeMenu.setAttribute('aria-label', 'Close navigation');
+	closeMenu.textContent = '×';
+	navLinks.prepend(closeMenu);
+
+	const setMenuOpen = (isOpen) => {
+		navLinks.classList.toggle('open', isOpen);
+		menu.setAttribute('aria-expanded', String(isOpen));
+	};
+
 	menu.addEventListener('click', () => {
-		navLinks.classList.toggle('open');
-		menu.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+		setMenuOpen(!navLinks.classList.contains('open'));
 	});
+
+	closeMenu.addEventListener('click', () => setMenuOpen(false));
 }
 
 const dropdown = document.querySelector('.nav-dropdown');
