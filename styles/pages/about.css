@@ -109,8 +109,9 @@
     background: #fff;
 }
 
+.about-page .about-vision-section,
 .about-page .about-mission-section {
-    background: #f7f5f3;
+    background: linear-gradient(145deg, #b21f2d, #831c29);
 }
 
 .about-page .about-principle-inner {
@@ -152,21 +153,27 @@
 
 .about-page .about-principle-copy .eyebrow {
     margin-bottom: .75rem;
+    color: #ffd3d7;
+}
+
+.about-page .about-principle-copy {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    background: linear-gradient(145deg, #3a171c, #831c29);
 }
 
 .about-page .about-principle-copy h2 {
     margin: 0 0 1rem;
-    color: var(--ink);
+    color: var(--white);
     font-size: clamp(2rem, 3.5vw, 3rem);
     line-height: 1.08;
 }
 
 .about-page .about-principle-copy p {
     margin: 0;
-    color: #4b4b4b;
+    color: rgba(255, 255, 255, .9);
     font-size: 1.05rem;
     line-height: 1.8;
-    text-align: left;
+    text-align: justify;
 }
 
 .about-page .about-insights {
@@ -236,13 +243,21 @@
     border-radius: 12px;
     background: var(--red);
     box-shadow: 0 10px 24px rgba(17, 17, 17, .08);
+    color: inherit;
+    text-decoration: none;
     transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
 
-.about-page .about-core-service-card:hover {
+.about-page .about-core-service-card:hover,
+.about-page .about-core-service-card:focus-visible {
     transform: translateY(-3px);
     border-color: rgba(178, 31, 45, .4);
     box-shadow: 0 14px 30px rgba(17, 17, 17, .12);
+}
+
+.about-page .about-core-service-card:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 3px;
 }
 
 .about-page .about-core-service-card img {
