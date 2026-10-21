@@ -302,15 +302,18 @@ nav {
 .dropdown-menu {
     position: absolute;
     top: calc(100% + 1rem);
-    right: -5rem;
+    left: 50%;
     display: none;
-    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
-    width: min(720px, 90vw);
+    width: min(720px, calc(100vw - 2rem));
+    max-height: calc(100vh - var(--nav-height) - 1rem);
     padding: 1.25rem;
+    overflow-y: auto;
     background: var(--white);
     box-shadow: 0 12px 30px rgba(17, 17, 17, .16);
     border-top: 3px solid var(--red);
+    transform: translateX(-50%);
 }
 
 .nav-dropdown.open .dropdown-menu {
@@ -321,6 +324,7 @@ nav {
     display: flex;
     flex-direction: column;
     gap: .45rem;
+    min-width: 0;
 }
 
 .dropdown-menu strong {
@@ -336,6 +340,7 @@ nav {
     font-size: .72rem;
     line-height: 1.35;
     text-transform: none;
+    overflow-wrap: anywhere;
 }
 
 .nav-cta {
@@ -1461,10 +1466,13 @@ h1 {
         position: static;
         grid-template-columns: 1fr;
         width: 100%;
+        max-height: none;
         margin-top: 1rem;
         padding: 1rem 0 0 1rem;
+        overflow: visible;
         box-shadow: none;
         border-top: 1px solid #e7d7c9;
+        transform: none;
     }
 
     .nav-cta {
@@ -1562,10 +1570,13 @@ h1 {
         position: static;
         grid-template-columns: 1fr;
         width: 100%;
+        max-height: none;
         margin-top: 1rem;
         padding: 1rem 0 0 1rem;
+        overflow: visible;
         box-shadow: none;
         border-top: 1px solid #e7d7c9;
+        transform: none;
     }
 
     .nav-cta {
