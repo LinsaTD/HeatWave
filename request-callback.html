@@ -75,13 +75,18 @@
         </header>
         <section class="content-section callback-layout">
             <div class="callback-notice" role="status">
-                Our callback form is currently undergoing verification. In the meantime, please contact us by
-                <a href="mailto:Info@heatwave.ae">email</a> or
-                <a href="tel:+97145845621">phone</a>.
+                Complete the form and WhatsApp will open with your callback request ready to send. Please review it
+                and tap Send in WhatsApp so our team receives it.
             </div>
-            <form class="contact-form">
+            <form class="contact-form" data-callback-form>
                 <label>Name<input type="text" name="name" required></label>
                 <label>Phone<input type="tel" name="phone" required></label>
+                <label>Send your request to
+                    <select name="whatsapp_number" required>
+                        <option value="971558231585">WhatsApp mobile: +971 55 823 1585</option>
+                        <option value="97145845621">WhatsApp office: +971 4 584 5621</option>
+                    </select>
+                </label>
                 <label>What do you need help with?<textarea name="request" required></textarea></label>
                 <button class="button" type="submit">Request callback</button>
             </form>

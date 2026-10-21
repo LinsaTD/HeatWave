@@ -291,11 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const submitButton = form.querySelector('button[type="submit"]');
             const originalLabel = submitButton ? submitButton.textContent : '';
 
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = 'Sending...';
-            }
-
             let status = form.querySelector('.form-status');
             if (!status) {
                 status = document.createElement('p');
@@ -303,6 +298,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 status.setAttribute('role', 'status');
                 status.setAttribute('aria-live', 'polite');
                 form.appendChild(status);
+            }
+
+            if (form.matches('[data-callback-form]')) {
+                const whatsappNumber = String(formData.get('whatsapp_number') || '');
+                const whatsappMessage = [
+                    'Callback request',
+                    `Name: ${name}`,
+                    `Phone: ${phone}`,
+                    `Request: ${request}`
+                ].join('\n');
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+                const whatsappWindow = window.open(whatsappUrl, '_blank');
+
+                if (whatsappWindow) {
+                    whatsappWindow.opener = null;
+                }
+
+                status.replaceChildren(
+                    document.createTextNode('WhatsApp opened with your request. Review it and tap Send. If it did not open, '),
+                    Object.assign(document.createElement('a'), {
+                        href: whatsappUrl,
+                        target: '_blank',
+                        rel: 'noopener noreferrer',
+                        textContent: 'open WhatsApp'
+                    }),
+                    document.createTextNode('.')
+                );
+                status.style.color = '#333';
+                return;
+            }
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
             }
 
             try {
