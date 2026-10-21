@@ -25,24 +25,51 @@ const navLinks = document.querySelector('.nav-links');
 const contactHeader = document.querySelector('.contact-header');
 const contactHeaderSocials = contactHeader?.querySelector('.contact-header-socials');
 const contactHeaderBrand = contactHeader?.querySelector('.contact-header-brand');
+const contactHeaderEmail = contactHeader?.querySelector('.contact-header-email');
+const contactHeaderOffice = contactHeader?.querySelector('.contact-header-office');
+const contactHeaderPhone = contactHeader?.querySelector('.contact-header-phone');
 const nav = document.querySelector('nav');
 const callbackLink = navLinks?.querySelector('.nav-cta');
 const callbackItem = callbackLink?.parentElement;
 
-if (contactHeader && contactHeaderSocials && contactHeaderBrand && nav && navLinks && callbackItem && menu) {
-	const mobileNavigation = window.matchMedia('(max-width: 1300px)');
-	const updateMobileHeader = () => {
-		if (mobileNavigation.matches) {
+if (contactHeaderBrand && nav && navLinks) {
+	const largeScreenNavigation = window.matchMedia('(min-width: 1101px)');
+	const navScrollBrand = contactHeaderBrand.cloneNode(true);
+	navScrollBrand.classList.add('nav-scroll-brand');
+	nav.insertBefore(navScrollBrand, navLinks);
+
+	const updateScrollBrand = () => {
+		nav.classList.toggle('has-scroll-brand', largeScreenNavigation.matches && window.scrollY > 80);
+	};
+
+	updateScrollBrand();
+	window.addEventListener('scroll', updateScrollBrand, { passive: true });
+	largeScreenNavigation.addEventListener('change', updateScrollBrand);
+}
+
+if (contactHeader && contactHeaderSocials && contactHeaderBrand && contactHeaderEmail && contactHeaderOffice
+	&& contactHeaderPhone && nav && navLinks && callbackItem && menu) {
+	const compactNavigation = window.matchMedia('(min-width: 901px) and (max-width: 1100px)');
+	const mobileNavigation = window.matchMedia('(max-width: 900px)');
+	const updateHeaderLayout = () => {
+		if (compactNavigation.matches) {
+			[contactHeaderBrand, contactHeaderEmail, contactHeaderOffice, contactHeaderPhone, contactHeaderSocials]
+				.forEach((element) => nav.insertBefore(element, menu));
+		} else if (mobileNavigation.matches) {
+			[contactHeaderEmail, contactHeaderOffice, contactHeaderPhone]
+				.forEach((element) => contactHeader.append(element));
 			nav.insertBefore(contactHeaderBrand, menu);
 			callbackItem.append(contactHeaderSocials);
 		} else {
-			contactHeader.insertBefore(contactHeaderBrand, contactHeader.firstElementChild);
-			contactHeader.append(contactHeaderSocials);
+			[contactHeaderBrand, contactHeaderEmail, contactHeaderOffice, contactHeaderPhone, contactHeaderSocials]
+				.forEach((element) => contactHeader.append(element));
 		}
+
 	};
 
-	updateMobileHeader();
-	mobileNavigation.addEventListener('change', updateMobileHeader);
+	updateHeaderLayout();
+	compactNavigation.addEventListener('change', updateHeaderLayout);
+	mobileNavigation.addEventListener('change', updateHeaderLayout);
 }
 
 if (menu && navLinks) {
