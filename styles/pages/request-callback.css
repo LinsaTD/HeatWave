@@ -42,15 +42,18 @@
 }
 
 .callback-layout .contact-form input,
-.callback-layout .contact-form textarea {
+.callback-layout .contact-form textarea,
+.callback-layout .contact-form select {
     padding: .9rem 1rem;
     border: 1px solid #d7d7d7;
     border-radius: 6px;
+    background: var(--white);
     transition: border-color .2s ease, box-shadow .2s ease;
 }
 
 .callback-layout .contact-form input:focus,
-.callback-layout .contact-form textarea:focus {
+.callback-layout .contact-form textarea:focus,
+.callback-layout .contact-form select:focus {
     border-color: var(--red);
     outline: none;
     box-shadow: 0 0 0 3px rgba(178, 31, 45, .14);
