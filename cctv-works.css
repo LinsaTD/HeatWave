@@ -1,0 +1,28 @@
+/* Page-specific styles: cctv-works */
+
+
+.inner-page .cctv-intro {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('../../images/Services/7.png');
+}
+
+
+
+.cctv-detail {
+    grid-template-columns: 1fr;
+}
+
+
+
+.cctv-detail .service-detail-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+.cctv-detail .core-services-heading{
+margin-top: 2rem;
+    padding: 0 0 .5rem 0;
+    color: var(--ink);
+    font-size: 1.35rem;
+
+}

@@ -1,0 +1,194 @@
+/* Page-specific styles: annual-maintenance */
+
+.inner-page main {
+    background: linear-gradient(180deg, #fff 0%, #f7f7f7 100%);
+}
+
+.inner-page .page-intro.annual-maintenance-intro {
+    min-height: 220px;
+    padding: 2.5rem max(6%, calc((100vw - 1100px) / 2));
+    background-position: center 44%;
+}
+
+.inner-page .page-intro.annual-maintenance-intro h1 {
+    max-width: 900px;
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    line-height: 1.08;
+    letter-spacing: .08em;
+}
+
+.inner-page .page-intro.annual-maintenance-intro p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.content-section {
+    padding: 4rem 6% 5rem;
+}
+
+.content-section > h2 {
+    max-width: 1100px;
+    margin: 0 auto 1.5rem;
+    color: var(--ink);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.1;
+}
+
+.service-intro-block {
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.service-intro-block p {
+    max-width: 1100px;
+    color: #4b4b4b;
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.service-intro-block p + p {
+    margin-top: 1rem;
+}
+
+.content-section .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.content-section .service-grid a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 360px;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--ink);
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(17, 17, 17, .08);
+    text-decoration: none;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.content-section .service-grid a:hover,
+.content-section .service-grid a:focus-visible {
+    transform: translateY(-5px);
+    border-color: rgba(178, 31, 45, .4);
+    box-shadow: 0 16px 32px rgba(29, 20, 16, .12);
+}
+
+.content-section .service-grid .amc-service-image {
+    display: block;
+    flex: 0 0 auto;
+    width: 100%;
+    height: 205px;
+    margin: 0;
+    object-fit: cover;
+    object-position: center;
+    transition: transform .45s ease;
+}
+
+.content-section .service-grid a:hover .amc-service-image,
+.content-section .service-grid a:focus-visible .amc-service-image {
+    transform: scale(1.06);
+}
+
+.content-section .service-grid .amc-service-card-content h3,
+.content-section .service-grid .amc-service-card-content p {
+    margin: 0;
+}
+
+.content-section .service-grid .amc-service-card-content h3 {
+    margin-bottom: .6rem;
+    color: var(--ink);
+    font-size: 1.02rem;
+    line-height: 1.35;
+    transition: color .25s ease;
+}
+
+.content-section .service-grid .amc-service-card-content p {
+    margin-bottom: 1.1rem;
+    color: #625d59;
+    font-size: .9rem;
+    line-height: 1.6;
+    text-align: justify;
+    transition: color .25s ease;
+}
+
+.content-section .service-grid .amc-service-card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.25rem 1.35rem 1.4rem;
+    background: #fff;
+    transition: background-color .25s ease;
+}
+
+.content-section .service-grid .amc-service-card-content > span {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    margin-top: auto;
+    padding: .55rem .75rem;
+    border-radius: 4px;
+    color: var(--red);
+    background: #f7f2f2;
+    font-size: .82rem;
+    font-weight: 700;
+    transition: color .25s ease, background-color .25s ease;
+}
+
+.content-section .service-grid a:hover .amc-service-card-content > span,
+.content-section .service-grid a:focus-visible .amc-service-card-content > span {
+    color: var(--red);
+    background: #fff;
+}
+
+.content-section .service-grid a:hover .amc-service-card-content,
+.content-section .service-grid a:focus-visible .amc-service-card-content {
+    background: var(--red);
+}
+
+.content-section .service-grid a:hover .amc-service-card-content h3,
+.content-section .service-grid a:focus-visible .amc-service-card-content h3,
+.content-section .service-grid a:hover .amc-service-card-content p,
+.content-section .service-grid a:focus-visible .amc-service-card-content p {
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .content-section {
+        padding: 3rem 6% 4rem;
+    }
+
+    .content-section .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .service-intro-block {
+        padding: 1.1rem 1rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .inner-page .page-intro.annual-maintenance-intro {
+        min-height: 280px;
+        padding-right: 8%;
+        padding-left: 8%;
+    }
+
+    .content-section .service-grid {
+        grid-template-columns: 1fr;
+    }
+}

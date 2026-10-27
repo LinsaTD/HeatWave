@@ -1,0 +1,30 @@
+/* Page-specific styles: fire-alarm-amc */
+
+.inner-page .fire-alarm-amc-intro {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, .24)), url('../../images/Services/1.png');
+    min-height: clamp(380px, 44vw, 500px);
+}
+
+.inner-page .fire-alarm-amc-intro p {
+    max-width: 780px;
+}
+
+.fire-alarm-amc-detail {
+    display: block;
+}
+
+.fire-alarm-amc-detail .service-detail-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.fire-alarm-amc-detail .core-services-heading {
+    margin-top: 2rem;
+    padding: 0 0 .5rem 0;
+    color: var(--ink);
+    font-size: 1.35rem;
+}
+
+.fire-alarm-amc-detail .feature-list h3 strong {
+    color: var(--red-dark);
+}
