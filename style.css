@@ -1937,6 +1937,10 @@ h1 {
     text-align: center;
 }
 
+.site-footer .copyright a {
+    color: inherit;
+}
+
 @media (max-width: 1000px) {
     .site-footer {
         grid-template-columns: repeat(3, minmax(0, 1fr));
